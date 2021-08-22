@@ -1,5 +1,6 @@
-const express= require('express');
-const dotenv = require('dotenv');
+const express= require('express')
+const path = require('path')
+const dotenv = require('dotenv')
 const morgan = require('morgan')
 const exphbs = require('express-handlebars')
 const connectDB = require('./config/db')
@@ -21,6 +22,9 @@ const PORT = process.env.PORT || 5000;
 
 app.engine('.hbs', exphbs({defaultLayout: 'main', extname:'.hbs'}));
 app.set('view engine', '.hbs');
+
+// Static folder
+app.use(express.static(path.join(__dirname,'public')))
 
 // Routes
 app.use('/', require('./routes/index'))
